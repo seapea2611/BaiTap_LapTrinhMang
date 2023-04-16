@@ -8,6 +8,11 @@
 #include <stdlib.h>
 #define MAX 1024
 int main(int argc, char *argv[]) {
+    if (argc != 3)
+    {
+        printf("Sai tham so.\n");
+        return 1;
+    }
     int client = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 
     struct sockaddr_in addr;
@@ -41,12 +46,13 @@ int main(int argc, char *argv[]) {
     diemtb[strcspn(diemtb, "\n")] = 0;
 
     char buff[4 * MAX + 4];
-    sprintf(buffer, "%s %s %s %s", mssv, hoten, ngaysinh, diemtb);
+    sprintf(buff, "%s %s %s %s", mssv, hoten, ngaysinh, diemtb);
     
     if(send(client, buff, strlen(buff),0) == -1) {
         perror("send failed");
         return 1;
     }
-    printf("success");
+    printf("success\n");
     close(client);
+    return 0;
 }

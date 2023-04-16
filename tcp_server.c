@@ -87,6 +87,7 @@ int main(int argc, char *argv[]) {
     int ret;
     while (1) {
         ret = recv(client, buff, sizeof(buff), 0);
+        buff[ret] = '\0';
         if (ret <= 0) {
             break;
         }
